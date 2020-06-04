@@ -120,11 +120,9 @@ class UnsplashPhotoPickerViewController: UIViewController {
 
         view.backgroundColor = .clear
         setupNotifications()
-        //setupNavigationBar()
         setupSearchController()
         setupCollectionView()
         setupSpinner()
-        //setupPeekAndPop()
 
         let trimmedQuery = Configuration.shared.query?.trimmingCharacters(in: .whitespacesAndNewlines)
         setSearchText(trimmedQuery)
@@ -132,10 +130,6 @@ class UnsplashPhotoPickerViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        //if dataSource.items.count == 0 {
-            //refresh()
-        //}
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -158,16 +152,6 @@ class UnsplashPhotoPickerViewController: UIViewController {
     private func setupNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShowNotification(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHideNotification(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-
-    private func setupNavigationBar() {
-        updateTitle()
-        navigationItem.leftBarButtonItem = cancelBarButtonItem
-
-        if Configuration.shared.allowsMultipleSelection {
-            doneBarButtonItem.isEnabled = false
-            navigationItem.rightBarButtonItem = doneBarButtonItem
-        }
     }
 
     private func setupSearchController() {
@@ -198,10 +182,6 @@ class UnsplashPhotoPickerViewController: UIViewController {
             spinner.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor),
             spinner.centerYAnchor.constraint(equalTo: collectionView.centerYAnchor)
         ])
-    }
-
-    private func setupPeekAndPop() {
-        previewingContext = registerForPreviewing(with: self, sourceView: collectionView)
     }
 
     private func showEmptyView(with state: EmptyViewState) {
