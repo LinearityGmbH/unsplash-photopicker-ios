@@ -6,6 +6,7 @@
   Copyright © 2018 Unsplash. All rights reserved.
 */
 
+//"search.placeholder" = "Search photos";
 "search.placeholder" = "Unsplash";
 
 "error.noResults.title" = "No results";

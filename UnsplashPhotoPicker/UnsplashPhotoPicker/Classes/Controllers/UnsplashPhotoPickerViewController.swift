@@ -130,6 +130,10 @@ class UnsplashPhotoPickerViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        //if dataSource.items.count == 0 {
+            //refresh()
+        //}
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -158,6 +162,7 @@ class UnsplashPhotoPickerViewController: UIViewController {
         let trimmedQuery = Configuration.shared.query?.trimmingCharacters(in: .whitespacesAndNewlines)
         if let query = trimmedQuery, query.isEmpty == false { return }
 
+        //navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.titleView = searchController.searchBar
         definesPresentationContext = true
