@@ -51,11 +51,12 @@ class UnsplashPhotoPickerViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.dragDelegate = self
         collectionView.register(PhotoCell.self, forCellWithReuseIdentifier: PhotoCell.reuseIdentifier)
         collectionView.register(PagingView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: PagingView.reuseIdentifier)
         collectionView.contentInsetAdjustmentBehavior = .automatic
         collectionView.layoutMargins = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 16.0)
-        collectionView.backgroundColor = UIColor.photoPicker.background
+        collectionView.backgroundColor = .clear
         collectionView.allowsMultipleSelection = Configuration.shared.allowsMultipleSelection
         return collectionView
     }()
@@ -117,13 +118,13 @@ class UnsplashPhotoPickerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.photoPicker.background
+        view.backgroundColor = .clear
         setupNotifications()
-        setupNavigationBar()
+        //setupNavigationBar()
         setupSearchController()
         setupCollectionView()
         setupSpinner()
-        setupPeekAndPop()
+        //setupPeekAndPop()
 
         let trimmedQuery = Configuration.shared.query?.trimmingCharacters(in: .whitespacesAndNewlines)
         setSearchText(trimmedQuery)
@@ -131,10 +132,10 @@ class UnsplashPhotoPickerViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        if dataSource.items.count == 0 {
-            refresh()
-        }
+        
+        //if dataSource.items.count == 0 {
+            //refresh()
+        //}
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -158,12 +159,12 @@ class UnsplashPhotoPickerViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShowNotification(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHideNotification(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-
+    
     private func setupNavigationBar() {
         updateTitle()
         navigationItem.leftBarButtonItem = cancelBarButtonItem
 
-        if Configuration.shared.allowsMultipleSelection {
+         if Configuration.shared.allowsMultipleSelection {
             doneBarButtonItem.isEnabled = false
             navigationItem.rightBarButtonItem = doneBarButtonItem
         }
@@ -173,10 +174,15 @@ class UnsplashPhotoPickerViewController: UIViewController {
         let trimmedQuery = Configuration.shared.query?.trimmingCharacters(in: .whitespacesAndNewlines)
         if let query = trimmedQuery, query.isEmpty == false { return }
 
-        navigationItem.searchController = searchController
+        //navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.titleView = searchController.searchBar
         definesPresentationContext = true
         extendedLayoutIncludesOpaqueBars = true
+    }
+    
+    private func setupPeekAndPop() {
+         previewingContext = registerForPreviewing(with: self, sourceView: collectionView)
     }
 
     private func setupCollectionView() {
@@ -197,10 +203,6 @@ class UnsplashPhotoPickerViewController: UIViewController {
             spinner.centerXAnchor.constraint(equalTo: collectionView.centerXAnchor),
             spinner.centerYAnchor.constraint(equalTo: collectionView.centerYAnchor)
         ])
-    }
-
-    private func setupPeekAndPop() {
-        previewingContext = registerForPreviewing(with: self, sourceView: collectionView)
     }
 
     private func showEmptyView(with state: EmptyViewState) {
@@ -357,7 +359,7 @@ extension UnsplashPhotoPickerViewController: UISearchBarDelegate {
         guard self.searchText != nil && searchText.isEmpty else { return }
 
         setSearchText(nil)
-        refresh()
+        //refresh()
         reloadData()
         scrollToTop()
         hideEmptyView()
