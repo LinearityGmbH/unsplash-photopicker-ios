@@ -120,9 +120,11 @@ class UnsplashPhotoPickerViewController: UIViewController {
 
         view.backgroundColor = .clear
         setupNotifications()
+        //setupNavigationBar()
         setupSearchController()
         setupCollectionView()
         setupSpinner()
+        //setupPeekAndPop()
 
         let trimmedQuery = Configuration.shared.query?.trimmingCharacters(in: .whitespacesAndNewlines)
         setSearchText(trimmedQuery)
@@ -157,6 +159,16 @@ class UnsplashPhotoPickerViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShowNotification(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHideNotification(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
+    private func setupNavigationBar() {
+        updateTitle()
+        navigationItem.leftBarButtonItem = cancelBarButtonItem
+
+         if Configuration.shared.allowsMultipleSelection {
+            doneBarButtonItem.isEnabled = false
+            navigationItem.rightBarButtonItem = doneBarButtonItem
+        }
+    }
 
     private func setupSearchController() {
         let trimmedQuery = Configuration.shared.query?.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -167,6 +179,10 @@ class UnsplashPhotoPickerViewController: UIViewController {
         navigationItem.titleView = searchController.searchBar
         definesPresentationContext = true
         extendedLayoutIncludesOpaqueBars = true
+    }
+    
+    private func setupPeekAndPop() {
+         previewingContext = registerForPreviewing(with: self, sourceView: collectionView)
     }
 
     private func setupCollectionView() {
