@@ -11,6 +11,7 @@ import UIKit
 protocol UnsplashPhotoPickerViewControllerDelegate: class {
     func unsplashPhotoPickerViewController(_ viewController: UnsplashPhotoPickerViewController, didSelectPhotos photos: [UnsplashPhoto])
     func unsplashPhotoPickerViewControllerDidCancel(_ viewController: UnsplashPhotoPickerViewController)
+    func unsplashPhotoPickerSearchBarTextDidChange(_ viewController: UnsplashPhotoPickerViewController, searchText: String)
 }
 
 class UnsplashPhotoPickerViewController: UIViewController {
@@ -346,6 +347,7 @@ extension UnsplashPhotoPickerViewController: UISearchControllerDelegate {
 extension UnsplashPhotoPickerViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text else { return }
+        delegate?.unsplashPhotoPickerSearchBarTextDidChange(self, searchText: text)
 
         setSearchText(text)
         refresh()
