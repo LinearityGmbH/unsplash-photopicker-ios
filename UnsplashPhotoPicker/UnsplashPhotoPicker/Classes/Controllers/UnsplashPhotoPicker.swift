@@ -30,7 +30,7 @@ public protocol UnsplashPhotoPickerDelegate: class {
      Notifies the delegate that UnsplashPhotoPicker search text has changed.
 
      - parameter photoPicker: The `UnsplashPhotoPicker` instance responsible for selecting the photos.
-     - parameter searchText: The search bar text.
+     - parameter searchText: The updated search bar text.
      */
     func unsplashPhotoPickerSearchBarTextDidChange(_ photoPicker: UnsplashPhotoPicker, searchText: String)
 }
@@ -83,11 +83,12 @@ public class UnsplashPhotoPicker: UINavigationController {
             }
         }
     }
-
 }
 
 // MARK: - UnsplashPhotoPickerViewControllerDelegate
+
 extension UnsplashPhotoPicker: UnsplashPhotoPickerViewControllerDelegate {
+    
     func unsplashPhotoPickerViewController(_ viewController: UnsplashPhotoPickerViewController, didSelectPhotos photos: [UnsplashPhoto]) {
         trackDownloads(for: photos)
         photoPickerDelegate?.unsplashPhotoPicker(self, didSelectPhotos: photos)
@@ -102,5 +103,4 @@ extension UnsplashPhotoPicker: UnsplashPhotoPickerViewControllerDelegate {
     func unsplashPhotoPickerSearchBarTextDidChange(_ viewController: UnsplashPhotoPickerViewController, searchText: String) {
         photoPickerDelegate?.unsplashPhotoPickerSearchBarTextDidChange(self, searchText: searchText)
     }
-    
 }
