@@ -32,7 +32,7 @@ public protocol UnsplashPhotoPickerDelegate: class {
      - parameter photoPicker: The `UnsplashPhotoPicker` instance responsible for selecting the photos.
      - parameter unsplashItemCount: Number o
      */
-    func unsplashPhotoPickerSearchItems(_ photoPicker: UnsplashPhotoPicker, unsplashItemCount: Int
+    func unsplashPhotoPickerSearchItems(_ photoPicker: UnsplashPhotoPicker, unsplashItemCount: Int)
 }
 
 /// `UnsplashPhotoPicker` is an object that can be used to select photos from Unsplash.
