@@ -27,12 +27,12 @@ public protocol UnsplashPhotoPickerDelegate: class {
     func unsplashPhotoPickerDidCancel(_ photoPicker: UnsplashPhotoPicker)
         
     /**
-     Notifies the delegate that UnsplashPhotoPicker search text has changed.
+     Notifies the delegate of the UnsplashPhotoPicker item count.
 
      - parameter photoPicker: The `UnsplashPhotoPicker` instance responsible for selecting the photos.
-     - parameter searchText: The updated search bar text.
+     - parameter unsplashItemCount: Number of query results.
      */
-    func unsplashPhotoPickerSearchBarTextDidChange(_ photoPicker: UnsplashPhotoPicker, searchText: String)
+    func unsplashPhotoPickerSearchItems(_ photoPicker: UnsplashPhotoPicker, unsplashItemCount: Int)
 }
 
 /// `UnsplashPhotoPicker` is an object that can be used to select photos from Unsplash.
@@ -100,7 +100,7 @@ extension UnsplashPhotoPicker: UnsplashPhotoPickerViewControllerDelegate {
         //dismiss(animated: true, completion: nil)
     }
     
-    func unsplashPhotoPickerSearchBarTextDidChange(_ viewController: UnsplashPhotoPickerViewController, searchText: String) {
-        photoPickerDelegate?.unsplashPhotoPickerSearchBarTextDidChange(self, searchText: searchText)
+    func unsplashPhotoPickerSearchItems(_ viewController: UnsplashPhotoPickerViewController, unsplashItemCount: Int) {
+        photoPickerDelegate?.unsplashPhotoPickerSearchItems(self, unsplashItemCount: unsplashItemCount)
     }
 }

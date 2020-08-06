@@ -11,7 +11,7 @@ import UIKit
 protocol UnsplashPhotoPickerViewControllerDelegate: class {
     func unsplashPhotoPickerViewController(_ viewController: UnsplashPhotoPickerViewController, didSelectPhotos photos: [UnsplashPhoto])
     func unsplashPhotoPickerViewControllerDidCancel(_ viewController: UnsplashPhotoPickerViewController)
-    func unsplashPhotoPickerSearchBarTextDidChange(_ viewController: UnsplashPhotoPickerViewController, searchText: String)
+    func unsplashPhotoPickerSearchItems(_ viewController: UnsplashPhotoPickerViewController, unsplashItemCount: Int)
 }
 
 class UnsplashPhotoPickerViewController: UIViewController {
@@ -271,6 +271,7 @@ class UnsplashPhotoPickerViewController: UIViewController {
         } else {
             dataSource = editorialDataSource
             searchText = nil
+            delegate?.unsplashPhotoPickerSearchItems(self, unsplashItemCount: dataSource.items.count)
         }
     }
 
@@ -347,7 +348,6 @@ extension UnsplashPhotoPickerViewController: UISearchControllerDelegate {
 extension UnsplashPhotoPickerViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text else { return }
-        delegate?.unsplashPhotoPickerSearchBarTextDidChange(self, searchText: text)
 
         setSearchText(text)
         refresh()
@@ -408,6 +408,7 @@ extension UnsplashPhotoPickerViewController: PagedDataSourceDelegate {
         DispatchQueue.main.async { [unowned self] in
             self.spinner.stopAnimating()
             self.hideEmptyView()
+            self.delegate?.unsplashPhotoPickerSearchItems(self, unsplashItemCount: dataSource.items.count)
 
             let hasWindow = self.collectionView.window != nil
             let collectionViewItemCount = self.collectionView.numberOfItems(inSection: 0)
