@@ -27,7 +27,7 @@ public protocol UnsplashPhotoPickerDelegate: class {
     func unsplashPhotoPickerDidCancel(_ photoPicker: UnsplashPhotoPicker)
         
     /**
-     Notifies the delegate of the UnsplashPhotoPicker item count
+     Notifies the delegate of the UnsplashPhotoPicker item count.
 
      - parameter photoPicker: The `UnsplashPhotoPicker` instance responsible for selecting the photos.
      - parameter unsplashItemCount: Number o
