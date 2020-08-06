@@ -30,7 +30,7 @@ public protocol UnsplashPhotoPickerDelegate: class {
      Notifies the delegate of the UnsplashPhotoPicker item count.
 
      - parameter photoPicker: The `UnsplashPhotoPicker` instance responsible for selecting the photos.
-     - parameter unsplashItemCount: Number o
+     - parameter unsplashItemCount: Number of query results.
      */
     func unsplashPhotoPickerSearchItems(_ photoPicker: UnsplashPhotoPicker, unsplashItemCount: Int)
 }
