@@ -348,7 +348,6 @@ extension UnsplashPhotoPickerViewController: UISearchControllerDelegate {
 extension UnsplashPhotoPickerViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text else { return }
-        delegate?.unsplashPhotoPickerSearchBarTextDidChange(self, searchText: text)
 
         setSearchText(text)
         refresh()
