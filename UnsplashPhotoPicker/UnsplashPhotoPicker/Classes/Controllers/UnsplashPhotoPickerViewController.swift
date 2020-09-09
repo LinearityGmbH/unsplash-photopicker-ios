@@ -12,6 +12,7 @@ protocol UnsplashPhotoPickerViewControllerDelegate: class {
     func unsplashPhotoPickerViewController(_ viewController: UnsplashPhotoPickerViewController, didSelectPhotos photos: [UnsplashPhoto])
     func unsplashPhotoPickerViewControllerDidCancel(_ viewController: UnsplashPhotoPickerViewController)
     func unsplashPhotoPickerSearchItems(_ viewController: UnsplashPhotoPickerViewController, unsplashItemCount: Int)
+    func unsplashPhotoPickerError(_ viewController: UnsplashPhotoPickerViewController, error: Error)
 }
 
 class UnsplashPhotoPickerViewController: UIViewController {
@@ -425,6 +426,7 @@ extension UnsplashPhotoPickerViewController: PagedDataSourceDelegate {
 
         DispatchQueue.main.async {
             self.showEmptyView(with: state)
+            self.delegate?.unsplashPhotoPickerError(self, error: error)
         }
     }
 }

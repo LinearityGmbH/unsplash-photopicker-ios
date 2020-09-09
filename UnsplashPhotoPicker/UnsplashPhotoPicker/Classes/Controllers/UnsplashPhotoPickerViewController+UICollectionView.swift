@@ -53,6 +53,7 @@ extension UnsplashPhotoPickerViewController: UICollectionViewDelegate {
         } else {
             delegate?.unsplashPhotoPickerViewController(self, didSelectPhotos: [photo])
         }
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
 
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
