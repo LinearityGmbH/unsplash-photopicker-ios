@@ -33,6 +33,14 @@ public protocol UnsplashPhotoPickerDelegate: class {
      - parameter unsplashItemCount: Number of query results.
      */
     func unsplashPhotoPickerSearchItems(_ photoPicker: UnsplashPhotoPicker, unsplashItemCount: Int)
+        
+    /**
+     Notifies the delegate of the UnsplashPhotoPicker that an error occured.
+
+     - parameter photoPicker: The `UnsplashPhotoPicker` instance responsible for selecting the photos.
+     - parameter error: The error occured
+     */
+    func unsplashPhotoPickerError(_ photoPicker: UnsplashPhotoPicker, error: Error)
 }
 
 /// `UnsplashPhotoPicker` is an object that can be used to select photos from Unsplash.
@@ -103,4 +111,9 @@ extension UnsplashPhotoPicker: UnsplashPhotoPickerViewControllerDelegate {
     func unsplashPhotoPickerSearchItems(_ viewController: UnsplashPhotoPickerViewController, unsplashItemCount: Int) {
         photoPickerDelegate?.unsplashPhotoPickerSearchItems(self, unsplashItemCount: unsplashItemCount)
     }
+        
+    func unsplashPhotoPickerError(_ viewController: UnsplashPhotoPickerViewController, error: Error) {
+        photoPickerDelegate?.unsplashPhotoPickerError(self, error: error)
+    }
+
 }
