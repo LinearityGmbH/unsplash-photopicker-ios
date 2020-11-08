@@ -25,7 +25,7 @@ public protocol UnsplashPhotoPickerDelegate: class {
      - parameter photoPicker: The `UnsplashPhotoPicker` instance responsible for selecting the photos.
      */
     func unsplashPhotoPickerDidCancel(_ photoPicker: UnsplashPhotoPicker)
-        
+
     /**
      Notifies the delegate of the UnsplashPhotoPicker item count.
 
@@ -33,7 +33,7 @@ public protocol UnsplashPhotoPickerDelegate: class {
      - parameter unsplashItemCount: Number of query results.
      */
     func unsplashPhotoPickerSearchItems(_ photoPicker: UnsplashPhotoPicker, unsplashItemCount: Int)
-        
+
     /**
      Notifies the delegate of the UnsplashPhotoPicker that an error occured.
 
@@ -96,7 +96,7 @@ public class UnsplashPhotoPicker: UINavigationController {
 // MARK: - UnsplashPhotoPickerViewControllerDelegate
 
 extension UnsplashPhotoPicker: UnsplashPhotoPickerViewControllerDelegate {
-    
+
     func unsplashPhotoPickerViewController(_ viewController: UnsplashPhotoPickerViewController, didSelectPhotos photos: [UnsplashPhoto]) {
         trackDownloads(for: photos)
         photoPickerDelegate?.unsplashPhotoPicker(self, didSelectPhotos: photos)
@@ -107,11 +107,11 @@ extension UnsplashPhotoPicker: UnsplashPhotoPickerViewControllerDelegate {
         photoPickerDelegate?.unsplashPhotoPickerDidCancel(self)
         //dismiss(animated: true, completion: nil)
     }
-    
+
     func unsplashPhotoPickerSearchItems(_ viewController: UnsplashPhotoPickerViewController, unsplashItemCount: Int) {
         photoPickerDelegate?.unsplashPhotoPickerSearchItems(self, unsplashItemCount: unsplashItemCount)
     }
-        
+
     func unsplashPhotoPickerError(_ viewController: UnsplashPhotoPickerViewController, error: Error) {
         photoPickerDelegate?.unsplashPhotoPickerError(self, error: error)
     }

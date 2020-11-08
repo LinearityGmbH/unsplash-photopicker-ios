@@ -84,7 +84,7 @@ class PhotoCell: UICollectionViewCell {
             //photoView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             //photoView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             //photoView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
-            
+
             photoView.topAnchor.constraint(equalToSystemSpacingBelow: contentView.topAnchor, multiplier: CGFloat(1)),
             photoView.bottomAnchor.constraint(equalToSystemSpacingBelow: contentView.bottomAnchor, multiplier: CGFloat(-1)),
             photoView.leadingAnchor.constraint(equalToSystemSpacingAfter: contentView.leadingAnchor, multiplier: CGFloat(1)),
@@ -100,12 +100,12 @@ class PhotoCell: UICollectionViewCell {
             contentView.bottomAnchor.constraint(equalToSystemSpacingBelow: checkmarkView.bottomAnchor, multiplier: CGFloat(1))
             ])
     }
-        
+
     private func setupNewCheckmarkView() {
         contentView.addSubview(newCheckmarkView)
         contentView.addSubview(blurEffectView)
     }
-    
+
     private lazy var newCheckmarkView: UIView = {
         let newCheckmarkView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         let checkmarkImage = newCheckmarkImageView
@@ -129,14 +129,14 @@ class PhotoCell: UICollectionViewCell {
         blurEffectView.alpha = 0.0
         return blurEffectView
     }()
-    
+
     private func animateNewCheckmark() {
-        
+
         newCheckmarkImageView.isHidden = false
         UIView.animate(withDuration: 0.4, animations: { [weak self] in
             guard let self = self else { return }
             self.blurEffectView.alpha = 0.4
-            self.newCheckmarkImageView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0);
+            self.newCheckmarkImageView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
         }, completion: {(_ finished: Bool) -> Void in
             UIView.animate(withDuration: 0.4, animations: {() -> Void in
                 self.blurEffectView.alpha = 0.0
@@ -145,6 +145,6 @@ class PhotoCell: UICollectionViewCell {
                 self.newCheckmarkImageView.isHidden = true
             })
         })
-        
+
     }
 }

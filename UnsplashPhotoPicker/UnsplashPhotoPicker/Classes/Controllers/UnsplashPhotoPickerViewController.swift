@@ -134,7 +134,7 @@ class UnsplashPhotoPickerViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         //if dataSource.items.count == 0 {
             //refresh()
         //}
@@ -161,7 +161,7 @@ class UnsplashPhotoPickerViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShowNotification(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHideNotification(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-    
+
     private func setupNavigationBar() {
         updateTitle()
         navigationItem.leftBarButtonItem = cancelBarButtonItem
@@ -182,7 +182,7 @@ class UnsplashPhotoPickerViewController: UIViewController {
         definesPresentationContext = true
         extendedLayoutIncludesOpaqueBars = true
     }
-    
+
     private func setupPeekAndPop() {
          previewingContext = registerForPreviewing(with: self, sourceView: collectionView)
     }
@@ -433,7 +433,9 @@ extension UnsplashPhotoPickerViewController: PagedDataSourceDelegate {
 
 // MARK: - UIViewControllerPreviewingDelegate
 extension UnsplashPhotoPickerViewController: UIViewControllerPreviewingDelegate {
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
+                           viewControllerForLocation location: CGPoint) -> UIViewController? {
         guard let indexPath = collectionView.indexPathForItem(at: location),
             let cellAttributes = collectionView.layoutAttributesForItem(at: indexPath),
             let cell = collectionView.cellForItem(at: indexPath) as? PhotoCell,
@@ -446,6 +448,7 @@ extension UnsplashPhotoPickerViewController: UIViewControllerPreviewingDelegate 
         return UnsplashPhotoPickerPreviewViewController(image: image)
     }
 
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
+                           commit viewControllerToCommit: UIViewController) {
     }
 }

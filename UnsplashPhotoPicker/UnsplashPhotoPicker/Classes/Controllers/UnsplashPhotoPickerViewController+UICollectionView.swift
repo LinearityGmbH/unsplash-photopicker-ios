@@ -77,17 +77,17 @@ extension UnsplashPhotoPickerViewController: UICollectionViewDelegateFlowLayout 
 
 // MARK: - UICollectionViewDragDelegate
 extension UnsplashPhotoPickerViewController: UICollectionViewDragDelegate {
-    
+
     func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         let provider = dataSource.items[indexPath.row].itemProvider
         let dragItem = UIDragItem(itemProvider: provider)
         return [dragItem]
     }
-    
+
 }
 
 // MARK: - WaterfallLayoutDelegate
